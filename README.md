@@ -1,8 +1,8 @@
-# Chatbot v02 - MERN with Socket.IO
+# Chat App - MERN with Socket.IO
 
 ## Summary
 
-STARTER CODE for a simple Chatbot app, built on MERN stack, using Socket.IO requests to communicate between server and client.
+This is a chat application built on the MERN stack, using Socket.IO requests to communicate between server and client.
 
 This repo includes SERVER-SIDE code for:
 
@@ -164,4 +164,4 @@ React app will open on in browser: http://localhost:3000/
 
 ## Authors
 
-Mobius Innovations, LLC
+Dave Gentilli
