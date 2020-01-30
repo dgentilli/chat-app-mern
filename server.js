@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
-//Socket IO
+/**Socket IO*/
 io.on("connection", function(socket) {
   console.log("a user connected");
   socket.on("message", function(msg) {
@@ -20,14 +20,15 @@ io.on("connection", function(socket) {
   });
 });
 
-// API
+/**API*/
 const messages = require("./api/messages")(io);
 const users = require("./api/users")(io);
 
 app.use(express.static(__dirname));
 
-// PRODUCTION CODE ONLY
-// Serve static files from the React frontend app
+/**PRODUCTION CODE ONLY
+ *Serve static files from the React frontend app
+ */
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
   app.use(express.static(path.join(__dirname, "client/build")));
@@ -36,21 +37,20 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Body parser middleware (https://www.npmjs.com/package/body-parser)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Test Route
+/**Test Route*/
 app.get("/", (req, res) => res.send("Chatbot server is running."));
 
-// API Routes
+/**API Routes*/
 app.use("/api/messages", messages); // Messages API
 app.use("/api/users", users); // Users API
 
-// DB config - MongoDB Atlas (using ENV variables)
+/**DB config - MongoDB Atlas (using ENV variables)*/
 const dbURI = process.env.mongoURI;
 
-// Connect to MongoDB
+/**Connect to MongoDB*/
 mongoose.connect(dbURI, { useNewUrlParser: true }).then(
   () => {
     console.log("MongoDB connection established");
@@ -60,13 +60,13 @@ mongoose.connect(dbURI, { useNewUrlParser: true }).then(
   }
 );
 
-// Passport middleware
+/**Passport middleware*/
 app.use(passport.initialize());
 
-// Passport config
+/**Passport config*/
 require("./config/passport")(passport);
 
-// Run server
+/**Run server*/
 const port = process.env.PORT || 5000;
 
 http.listen(port, () => console.log(`Server running on port ${port}`));
